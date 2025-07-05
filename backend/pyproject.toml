@@ -1,8 +1,10 @@
-[tool.poetry]
+[project]
 name = "delta-sync"
 version = "0.1.0"
 description = "Delta-based synchronization demo (backend)"
-authors = ["niqzart <niqzart@gmail.com>"]
+authors = [
+    {name = "niqzart", email = "qwert45hi@yandex.ru"},
+]
 readme = "README.md"
 requires-python = "~=3.13,<4.0"
 dynamic = ["dependencies"]
@@ -15,13 +17,27 @@ build-backend = "poetry.core.masonry.api"
 package-mode = false
 
 [tool.poetry.dependencies]
-# TODO add your production dependensies here
+fastapi = "^0.115.14"
+uvicorn = {extras = ["standard"], version = "^0.35.0"}
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.41"}
+psycopg = {extras = ["binary"], version = "^3.2.9"}
+tmexio = "^0.2.1"
+pydantic-settings = "^2.10.1"
+
+[tool.poetry.group.types.dependencies]
+# TODO you can add dedicated type-stubs here
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.4"
-# TODO you can add pytest plugins & test dependencies here
+pydantic-marshals = {extras = ["assert-contains"], version = "^0.3.15"}
+freezegun = "^1.5.2"
+polyfactory = "^2.22.0"
+faker = "^37.4.0"
 
 [tool.poetry.group.dev.dependencies]
+watchfiles = "^1.1.0"
+
+[tool.poetry.group.lint.dependencies]
 flake8 = "7.0.0"
 black = "24.10.0"
 isort = "5.13.2"
@@ -49,9 +65,6 @@ flake8-use-pathlib = "0.3.0"
 flake8-test-name = "^0.1.5"
 wemake-python-styleguide = "0.18.0"
 
-[tool.poetry.group.types.dependencies]
-# TODO you can add dedicated type-stubs here
-
 [tool.isort]
 profile = "black"
 py_version = 313
@@ -65,4 +78,13 @@ line_length = 88
 strict = true
 warn_unreachable = true
 warn_redundant_casts = true
-# TODO you can add mypy plugins here
+disable_error_code = ["prop-decorator"]  # computed_field
+plugins = [
+  "pydantic.mypy",
+  "pydantic_marshals.mypy.plugin",
+]
+
+[tool.pydantic-mypy]
+init_typed = false
+init_forbid_extra = true
+warn_required_dynamic_aliases = true
