@@ -45,7 +45,7 @@ services:
         source: ./backend/app
         target: /backend/app
       - type: bind
-        source: ./tests
+        source: ./backend/tests
         target: /backend/tests
     command:
       - "--reload"
