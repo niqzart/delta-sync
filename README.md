@@ -21,12 +21,17 @@ docker compose up -d --wait
 cd frontend
 ```
 
+### Install
+```sh
+pnpm install
+```
+
 ### Run (dev-mode)
 ```sh
-npm run develop
+pnpm run dev
 ```
 
 ### Build
 ```sh
-npm run build
+pnpm run build
 ```

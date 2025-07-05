@@ -11,11 +11,12 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-added-large-files
-        exclude: (frontend/package-lock.json)
+        exclude: (frontend/pnpm-lock.yaml)
       # executable files:
       - id: check-executables-have-shebangs
       # other files (markup & docs):
       - id: check-json
+        exclude: (frontend/tsconfig.app.json|frontend/tsconfig.node.json)
       - id: check-yaml
 
   - repo: https://github.com/myint/autoflake
