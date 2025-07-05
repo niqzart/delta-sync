@@ -6,13 +6,14 @@ from typing import Annotated
 from fastapi import APIRouter, FastAPI
 from starlette import status
 from starlette.requests import Request
-from starlette.responses import Response
+from starlette.responses import JSONResponse, Response
 from tmexio import TMEXIO, EventName, PydanticPackager
 
 from app.common.sqlalchemy_ext import session_context
 from app.common.starlette_cors_ext import CorrectCORSMiddleware
 from app.common.tmexio_ext import remove_ping_pong_logs
 from app.config import Base, engine, sessionmaker, settings
+from app.exceptions.base_exceptions import BaseClientException
 
 internal_router = APIRouter(prefix="/api/internal")
 
@@ -58,10 +59,20 @@ app.include_router(public_router)
 
 
 @app.get(
-    "/_healthcheck", include_in_schema=False, status_code=status.HTTP_204_NO_CONTENT
+    "/_healthcheck",
+    include_in_schema=False,
+    status_code=status.HTTP_204_NO_CONTENT,
 )
 async def healthcheck() -> None:
     pass
+
+
+@app.exception_handler(BaseClientException)
+async def exception_handler(
+    _request: Request,
+    exception: BaseClientException,
+) -> JSONResponse:
+    return exception.build_json_response()
 
 
 app.add_middleware(

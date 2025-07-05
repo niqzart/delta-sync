@@ -36,6 +36,8 @@ extend-ignore =
   U100
   # fails to understand enums
   WPS115
+  # fails to understand class attribute documentation
+  WPS322 WPS462
   # fails to understand overloading
   WPS428
   # fails to understand pipe-unions
