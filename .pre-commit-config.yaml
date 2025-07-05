@@ -51,6 +51,28 @@ repos:
         require_serial: true
         types_or: [python, pyi]
 
+  - repo: https://github.com/egormkn/run-in-subdirectory
+    rev: 1.0.1
+    hooks:
+      - id: run-in-subdirectory
+        alias: prettier
+        name: prettier
+        args:
+          - frontend
+          - pnpm exec prettier --ignore-unknown --write
+        types_or: [javascript, jsx, ts, tsx]
+
+  - repo: https://github.com/egormkn/run-in-subdirectory
+    rev: 1.0.1
+    hooks:
+      - id: run-in-subdirectory
+        alias: eslint
+        name: eslint
+        args:
+          - frontend
+          - pnpm exec eslint
+        types_or: [javascript, jsx, ts, tsx]
+
   - repo: https://github.com/python-poetry/poetry
     rev: 2.1.3
     hooks:

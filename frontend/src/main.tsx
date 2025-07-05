@@ -1,7 +1,7 @@
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip"
-import { StrictMode } from "react"
-import { createRoot } from "react-dom/client"
-import "./index.css"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -13,9 +13,10 @@ createRoot(document.getElementById("root")!).render(
       </TooltipTrigger>
       <TooltipContent>
         <p className="w-80">
-          Delta-based synchronization demo web application made with FastAPI, SocketIO (TMEXIO), SQLAlchemy, React & Vite
+          Delta-based synchronization demo web application made with FastAPI,
+          SocketIO (TMEXIO), SQLAlchemy, React & Vite
         </p>
       </TooltipContent>
     </Tooltip>
   </StrictMode>,
-)
+);
